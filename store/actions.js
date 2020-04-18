@@ -17,27 +17,35 @@ export const getDeck = (id) => {
   };
 };
 
-export const addDeck = (title) => {
+export const addDeck = (title, id) => {
   return {
     type: ADD_DECK,
     deck: {
       title,
+      id,
       cards: [],
       createdAt: Date.now(),
     },
   };
 };
 
-export const addCardToDeck = (title, card) => {
+export const addCardToDeck = (id, card) => {
   return {
     type: ADD_CARD_TO_DECK,
-    title,
+    id,
     card: {
       front: card.front,
       back: card.back,
       id: uuidv4(),
     },
   };
+};
+
+export const _addDeck = (title) => (dispatch, getState) => {
+  const id = uuidv4();
+  dispatch(addDeck(title, id));
+  const deck = getState()[id];
+  return deck;
 };
 
 // {

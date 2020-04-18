@@ -5,6 +5,7 @@ import DeckCard from "../components/deck-card";
 import Button from "../components/button";
 import { useDispatch } from "react-redux";
 import { addDeck } from "../store/actions";
+import { _addDeck } from "../store/actions";
 const config = {
   headerBackButton: false,
   headerText: "Add Deck",
@@ -13,7 +14,7 @@ const config = {
   header: true,
 };
 
-export default (props) => {
+export default ({ navigation, ...props }) => {
   const [deck, onChangeDeck] = React.useState("Deck");
   const dispatch = useDispatch();
   return (
@@ -26,7 +27,13 @@ export default (props) => {
         onChangeText={(deck) => onChangeDeck(deck)}
         value={deck}
       />
-      <Button title="Create Deck" onPress={() => dispatch(addDeck(deck))} />
+      <Button
+        title="Create Deck"
+        onPress={() => {
+          const newDeck = dispatch(_addDeck(deck));
+          navigation.navigate("Deck", { deck: newDeck });
+        }}
+      />
     </View>
   );
 };

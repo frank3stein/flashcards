@@ -1,17 +1,16 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
 import styled, { css } from "@emotion/native";
-import HomeView from "./views/home-view";
-import DeckView from "./views/deck-view";
-import AddCard from "./views/add-card";
+import Home from "./views/home-stack";
 import AddDeck from "./views/add-deck";
 import store from "./store/store";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 // import { NativeRouter, Route } from "react-router-native";
+import { setLocalNotification } from "./helper";
 
 const Vuew = styled.View`
   flex: 1;
@@ -20,6 +19,9 @@ const Vuew = styled.View`
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  useEffect(() => {
+    setLocalNotification();
+  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -59,7 +61,7 @@ export default function App() {
               footerButtons={true}
               name="Home"
             /> */}
-            <Tab.Screen name="Home" component={HomeView} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Add Deck" component={AddDeck} />
           </Tab.Navigator>
           {/* <AddDeck name="Add Deck" /> */}

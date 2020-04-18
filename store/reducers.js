@@ -13,14 +13,14 @@ export const decks = (state = {}, action) => {
     case ADD_DECK:
       return {
         ...state,
-        [action.deck.title]: { ...action.deck },
+        [action.deck.id]: { ...action.deck },
       };
     case ADD_CARD_TO_DECK:
       return {
         ...state,
-        [action.title]: {
-          ...state[action.title],
-          cards: state[action.title]["cards"].concat(action.card),
+        [action.id]: {
+          ...state[action.id],
+          cards: state[action.id]["cards"].concat(action.card),
         },
       };
     default:

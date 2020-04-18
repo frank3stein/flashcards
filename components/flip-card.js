@@ -11,10 +11,7 @@ const Vuew = styled.View`
   align-items: center;
 `;
 
-//deck id which is title
-export default ({ deck }) => {
-  console.log(deck);
-  const numberOfCards = deck.cards.length;
+export default ({ card, isFront }) => {
   return (
     <Vuew>
       <Text
@@ -22,9 +19,8 @@ export default ({ deck }) => {
           font-size: 2rem;
         `}
       >
-        {deck.title}
+        {isFront ? card.front : card.back}
       </Text>
-      <Text>Cards in the deck: {numberOfCards}</Text>
     </Vuew>
   );
 };
